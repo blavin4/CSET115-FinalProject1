@@ -5,6 +5,86 @@
 }
 
 body {
-    background: linear-gradient(rgb(31, 250, 3), rgb(67, 32, 3), rgb(255, 1, 225));
+    background-color: rgb(185, 210, 210);
     height: 100vh;
+}
+
+h1 {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: 64px;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+}
+
+.players {
+    display: flex;
+    justify-content: center;
+}
+
+.player1 {
+    color: rgb(56, 85, 85);
+}
+
+.player2 {
+    color: rgb(7, 147, 147);
+}
+
+.player-stats {
+    margin: 0px 10px;
+}
+
+.player-name {
+    text-align: center;
+}
+
+.player-score {
+    text-align: center;
+}
+
+.turn {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 550px;
+    background-color: rgb(135, 148, 148);
+    border-radius: 40px;
+}
+
+.board {
+    width: 400px;
+    height: 400px;
+}
+
+.row {
+    display: flex;
+    height: 33.3%;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    button {
+        width: 100%;
+        height: 100%;
+        border: transparent;
+        border-radius: 10px;
+        font-size: 500%;
+        background-color: rgb(103, 120, 120);;
+    }
 }
