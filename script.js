@@ -36,9 +36,6 @@ function move(square) {
     }
 }
 
-function check(row, column) {
-    
-}
 
 function clear() {
     squares.forEach(square => {
@@ -63,3 +60,27 @@ squares.forEach(square => {
         move(this)
     })
 });
+
+
+function check() {
+    const mark = currentPlayer === 1 ? "X" : "O"
+
+    const winner = board.some(row =>
+        row.every(square => square.innerHTML === mark)
+    )
+
+    if (winner) {
+        statusLabel.innerHTML = `Player ${currentPlayer} has won!`
+        playerScores[currentPlayer - 1]++
+        playerScoreLabels[0].innerHTML = playerScores[0]
+        playerScoreLabels[1].innerHTML = playerScores[1]
+        playButton.style.visibility = "visible"
+    } else if (turnCount >= 9) {
+        statusLabel.innerHTML = "It's a draw, nobody wins"
+        playButton.style.visibility = "visible"
+    } else {
+        currentPlayer = currentPlayer === 1 ? 2 : 1
+        statusLabel.innerHTML = `Player ${currentPlayer}'s Turn`
+        turnCount++
+    }
+}
