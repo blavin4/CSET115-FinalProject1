@@ -1,3 +1,4 @@
+const ties = document.getElementById("tie")
 const playerScoreLabels = document.querySelectorAll(".player-score")
 const squares = document.querySelectorAll(".square")
 const statusLabel = document.querySelector(".status")
@@ -14,6 +15,7 @@ for (let i = 0; i < 3; i++) {
 
 let currentPlayer = 1
 let turnCount = 1
+let tieCount = 0
 
 let playerScores = [0, 0]
 
@@ -63,20 +65,43 @@ squares.forEach(square => {
 
 
 function check() {
-    const mark = currentPlayer === 1 ? "X" : "O"
+    const mark = currentPlayer === 1 ? "X" : "O" // just learned that ? can be used as a true or false condition... pretty cool
+    //if currentPlayer equals 1, currentPlayer = X else = O
+    let winner = false
 
-    const winner = board.some(row =>
-        row.every(square => square.innerHTML === mark)
-    )
+    for (let i = 0; i < 3; i++) {
+        if (board[i][0].innerHTML == mark && board[i][1].innerHTML == mark && board[i][2].innerHTML == mark) {
+            winner = true
+        }
+    }
+
+    if (!winner) {
+        for (let i = 0; i < 3; i++) {
+            if (board[0][i].innerHTML == mark && board[1][i].innerHTML == mark && board[2][i].innerHTML == mark) {
+                winner = true
+            }
+        }
+    }
+
+    if (!winner) {
+        if (board[0][0].innerHTML == mark && board[1][1].innerHTML == mark && board[2][2].innerHTML == mark) {
+            winner = true
+        } else if (board[0][2].innerHTML == mark && board[1][1].innerHTML == mark && board[2][0].innerHTML == mark) {
+            winner = true
+        }
+    }
 
     if (winner) {
         statusLabel.innerHTML = `Player ${currentPlayer} has won!`
         playerScores[currentPlayer - 1]++
+
         playerScoreLabels[0].innerHTML = playerScores[0]
         playerScoreLabels[1].innerHTML = playerScores[1]
         playButton.style.visibility = "visible"
     } else if (turnCount >= 9) {
         statusLabel.innerHTML = "It's a draw, nobody wins"
+        tieCount++
+        ties.innerHTML = tieCount
         playButton.style.visibility = "visible"
     } else {
         currentPlayer = currentPlayer === 1 ? 2 : 1
